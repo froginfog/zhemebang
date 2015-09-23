@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+  {% if p_class %}
+    {{ p_class.product_class_name }}_{{ company_name }}
+  {% else %}
+    产品介绍_{{ company_name }}
+  {% endif %}
+{% endblock %}
+
+{% block main %}
+	<div class="row">
+<!--left-->  
+{% include 'left.html' %}
+<!--left end-->    
+    <div class="col-md-9 col-sm-9 col-xs-12">
+      <div class="row">
+      	<div class="col-md-12 c0l-sm-12 col-xs-12" style="padding:0 0 0 0">
+        	<h3 style="margin:0 0 10px 15px;"><span class="label label-primary" >{% if p_class %}{{ p_class.product_class_name }}{% else %}产品介绍{% endif %}</span><span class="pull-right small">当前位置：首页-产品介绍</span></h3>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <hr style="margin:5px">
+<!--main-->      
+      <div class="row">
+      {% for p in p_list %}
+      	<div class="col-md-4 col-sm-6 col-xs-12">
+ 					<div class="thumbnail">
+          	<a href="/products_show/{{ p.id }}"><img src="/media/{{ p.product_content_pic }}"></a>
+        	</div>
+        	<div class="text-center"><h5>{{ p.product_content_name }}</h5></div>
+      	</div>
+      {% endfor %}
+      </div>
+      <ul class="pagination">
+      {% for p in pg.page_range %}
+      	<li><a href="?page={{ p }}">{{ p }}</a></li>
+      {% endfor %}
+      </ul>
+<!--main end-->        
+        <div class="clearfix"></div>
+    </div>
+  </div>
+{% endblock %}

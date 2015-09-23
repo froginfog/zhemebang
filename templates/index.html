@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ company_name }}
+{% endblock %}
+
+{% block main %}
+  <div class="row">
+  	<div class="col-md-3">
+    	<ul class="list-group">
+      {% for c1 in class_list1 %}
+          	<li class="list-group-item active"><span class="glyphicon glyphicon-arrow-down"></span> <a href="/products/{{ c1.id }}" style="color: #ffffff">{{ c1.product_class_name }}</a></li>
+        {% for c2 in class_list2 %}
+          {% if c2.product_class_parent_id == c1.id %}
+            <li class="list-group-item"><span class="glyphicon glyphicon-arrow-right"></span>  <a href="/products/{{ c2.id }}">{{ c2.product_class_name }}</a></li>
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+      </ul>
+    </div>
+    <div class="col-md-9">
+      <div class="row">
+      {% for p in product %}
+				<div class="col-md-4 col-sm-6 col-xs-6">
+        	<div class="thumbnail" style=" height:290px"><a href="/products_show/{{ p.id }}"><img src="media/{{ p.product_content_pic }}" width="252px" height="190px"/></a>
+          	<div class="caption">
+          	<h4>{{ p.product_content_name }}</h4>
+            <p>{{ p.product_content_intro|safe }}</p>
+          </div>
+          </div>
+        </div>
+      {%  endfor %}
+
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+
+  <div class="row">
+  	<div class="col-md-12">
+    	<div class="panel panel-primary">
+      	<div class="panel-heading"><div class="panel-title"><span class="glyphicon glyphicon-globe"></span> 公司简介<a href="/single/gsjj"><span class="pull-right small">更多</span></a></div></div>
+        <div class="panel-body">{{ single.single_page_intro|safe }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+
+  <div class="row">
+  	<div class="col-md-6 col-sm-12 col-xs-12">
+    	<div class="list-group">
+      	<div class="list-group-item active"><span class="glyphicon glyphicon-star"></span> 公司新闻<a href="/news/1" style="color: #ffffff"><span class="pull-right">更多</span></a></div>
+      {% for n in news %}
+        <div class="list-group-item"><span class="badge">{{ n.news_content_date|date:'Y-m-d' }}</span>{{ n.news_content_title|truncatechars:30 }}</div>
+      {% endfor %}
+      </div>
+    </div>
+    <div class="col-md-6 col-sm-12 col-xs-12">
+    	<div class="list-group">
+      	<div class="list-group-item active"><span class="glyphicon glyphicon-star-empty"></span> 国内新闻</div>
+        <div class="list-group-item">
+        	<h4 class="list-group-item-heading"><a href="{{ news1.link }}" target="_blank">{{ news1.title|truncatechars:25 }}</a><span class="badge pull-right">{{ news1.date }}</span></h4>
+          <p class="list-group-item-text">{{ news1.descrip|truncatechars:80 }}</p>
+        </div>
+        <div class="list-group-item">
+        	<h4 class="list-group-item-heading"><a href="{{ news2.link }}" target="_blank">{{ news2.title|truncatechars:25 }}</a><span class="badge pull-right">{{ news2.date }}</span></h4>
+          <p class="list-group-item-text">{{ news2.descrip|truncatechars:80 }}</p>
+        </div>
+        <div class="list-group-item">
+        	<h4 class="list-group-item-heading"><a href="{{ news3.link }}" target="_blank">{{ news3.title|truncatechars:25 }}</a><span class="badge pull-right">{{ news3.date }}</span></h4>
+          <p class="list-group-item-text">{{ news3.descrip|truncatechars:80 }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+{% endblock %}

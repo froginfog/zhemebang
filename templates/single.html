@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+  {{ content.single_page_title }}_{{ company_name }}
+{% endblock %}
+
+
+{% block main %}
+	<div class="row">
+<!--left-->  
+{% include 'left.html' %}
+<!--left end-->    
+    <div class="col-md-9 col-sm-9 col-xs-12">
+      <div class="row">
+      	<div class="col-md-12 c0l-sm-12 col-xs-12" style="padding:0 0 0 0">
+        	<h3 style="margin:0 0 10px 15px;"><span class="label label-primary" >{{ content.single_page_title }}</span><span class="pull-right small">当前位置：首页-{{ content.single_page_title }}</span></h3>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <hr style="margin:5px">
+<!--main-->      
+      <div class="row">
+        	<div class="col-md-12 col-sm-12 col-xs-12">{{ content.single_page_content|safe }}</div>
+        </div>
+<!--main end-->        
+        <div class="clearfix"></div>
+    </div>
+  </div>
+{% endblock %}

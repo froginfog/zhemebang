@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  {{ p_content.product_content_name }}_产品介绍_{{ company_name }}
+{% endblock %}
+
+{% block main %}
+	<div class="row">
+<!--left-->  
+{% include 'left.html' %}
+<!--left end-->    
+    <div class="col-md-9 col-sm-9 col-xs-12">
+      <div class="row">
+      	<div class="col-md-12 c0l-sm-12 col-xs-12" style="padding:0 0 0 0">
+        	<h3 style="margin:0 0 10px 15px;"><span class="label label-primary" >产品介绍</span><span class="pull-right small">当前位置：首页-产品介绍</span></h3>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <hr style="margin:5px">
+<!--main-->      
+      <div class="row">
+      	<div class="col-md-12 col-sm-12 col-xs-12">
+					<div class="row">
+          	<div class="col-md-12">
+            	<div class="media">
+              	<img class="media-object pull-left img-responsive" src="/media/{{ p_content.product_content_pic }}" width="250" height="200">
+                <div class="media-body">
+                	<h4>{{ p_content.product_content_name }}</h4>
+                  <P>产品规格：{{ p_content.product_content_spec }}</P>
+                  <P>所属分类：{% for cls in p_class %}{{ cls.product_class_name }}{% endfor %}</P>
+                  <P>产品价格：{{ p_content.product_content_price }}</P>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr style="margin:5px">
+          <div class="row">
+          	<div class="col-md-12">
+            <h4>详细介绍:</h4>
+            <img class="img-responsive" src="/media/{{ p_content.product_content_pic }}">
+            {{ p_content.product_content_content|safe }}
+            </div>
+          </div>
+
+      	</div>
+      </div>
+<!--main end-->        
+        <div class="clearfix"></div>
+    </div>
+  </div>
+{% endblock %}
